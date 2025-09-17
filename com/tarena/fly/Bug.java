@@ -11,7 +11,9 @@ public class Bug extends FlyingObject implements Enemy {
 		width = image.getWidth();
 		height = image.getHeight();
         Random rand = new Random();
-		y =  rand.nextInt(-height,200); // [0,20);          
+		 // 從畫面上方隨機出現一點高度（避免全部從同一行）
+        y = -height - rand.nextInt(150);
+		// y =  rand.nextInt(-height,200); // [0,20);          
 		//x = rand.nextInt(ShootGame.WIDTH - width);
         x = -5;
 	}
@@ -30,8 +32,9 @@ public class Bug extends FlyingObject implements Enemy {
 	/** 移動 */
 	@Override
 	public void step() {   
-		x += xSpeed;
-		y += ySpeed;
-
-	}
+        int xs = Math.max(1, (int)Math.round(xSpeed * ShootGame.enemySpeedMultiplier));
+        int ys = Math.max(1, (int)Math.round(ySpeed * ShootGame.enemySpeedMultiplier));
+        x += xs;
+        y += ys;
+    }
 }

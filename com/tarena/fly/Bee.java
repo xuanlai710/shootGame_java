@@ -30,16 +30,33 @@ public class Bee extends FlyingObject implements Award{
 		return y>ShootGame.HEIGHT;
 	}
 
-	/* 移動，可斜著飛 */
+	// /* 移動，可斜著飛 */
+	// @Override
+	// public void step() {      
+	// 	x -= xSpeed;
+	// 	y += ySpeed;
+	// 	if(x > ShootGame.WIDTH-width){  
+	// 		xSpeed = 2;
+	// 	}
+	// 	if(x < 0){
+	// 		xSpeed = -3;
+	// 	}
+	// }
 	@Override
-	public void step() {      
-		x -= xSpeed;
-		y += ySpeed;
-		if(x > ShootGame.WIDTH-width){  
-			xSpeed = 2;
-		}
-		if(x < 0){
-			xSpeed = -3;
-		}
+    public void step() {
+        int xs = (int)Math.round(xSpeed * ShootGame.enemySpeedMultiplier);
+        int ys = (int)Math.round(ySpeed * ShootGame.enemySpeedMultiplier);
+        if (xs == 0) xs = xSpeed < 0 ? -1 : 1;
+        if (ys == 0) ys = 1;
+
+        x -= xs;
+        y += ys;
+
+        if (x > ShootGame.WIDTH - width) {
+            xSpeed = Math.abs(xSpeed);
+        }
+        if (x < 0) {
+            xSpeed = -Math.abs(xSpeed);
+        }
 	}
 }

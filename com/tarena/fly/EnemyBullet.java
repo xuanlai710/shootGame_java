@@ -9,7 +9,7 @@ public class EnemyBullet extends FlyingObject {
         this.y = y;
         this.vx = vx;
         this.vy = vy;
-        this.image = ShootGame.bullet; // 暫用同一張子彈圖
+        this.image = ShootGame.bullet_eme;
         this.width = image.getWidth();
         this.height = image.getHeight();
     }
